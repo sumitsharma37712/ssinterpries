@@ -1,0 +1,59 @@
+{
+  "project": "S.S. Enterprises - Home Decoration Wholesale",
+  "version": "1.0.0",
+  "description": "Professional landing page for home decoration wholesale business",
+  "author": "Web Design Team",
+  "created": "2026-02-16",
+  "company": {
+    "name": "S.S. Enterprises",
+    "tagline": "Premium Home Decoration Wholesale",
+    "phone": "+91 XXXXXXXXXX",
+    "email": "info@ssenterpises.com",
+    "address": "Delhi, India",
+    "businessHours": {
+      "weekday": "9:00 AM - 6:00 PM",
+      "weekend": "Closed on Sundays"
+    }
+  },
+  "theme": {
+    "primaryColor": "#1a472a",
+    "accentColor": "#d4a574",
+    "backgroundColor": "#f9f9f9",
+    "textColor": "#333",
+    "lightBackground": "#f0ede7"
+  },
+  "sections": [
+    "header",
+    "hero",
+    "products",
+    "portfolio",
+    "why-choose-us",
+    "testimonials",
+    "contact",
+    "footer"
+  ],
+  "features": [
+    "Smooth scroll animations",
+    "Parallax hero section",
+    "Scroll progress indicator",
+    "Hover animations on cards",
+    "Ripple effect on buttons",
+    "Responsive design",
+    "Contact form",
+    "Testimonials section",
+    "Product categories",
+    "Portfolio gallery"
+  ],
+  "dependencies": {
+    "fontAwesome": "6.0.0",
+    "css": "css/style.css",
+    "javascript": "js/script.js"
+  },
+  "files": {
+    "html": ["index.html", "index-clean.html"],
+    "css": ["css/style.css"],
+    "js": ["js/script.js"],
+    "assets": ["assest/logoi.jpeg"],
+    "documentation": ["README.md", "config.json"]
+  }
+}
