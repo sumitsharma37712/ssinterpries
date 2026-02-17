@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
     <title>S.S. Enterprises - Home Decoration Wholesale</title>
     <style>
         /* Animations */
@@ -18,56 +20,13 @@
             from { opacity: 0; transform: translateX(60px); }
             to { opacity: 1; transform: translateX(0); }
         }
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-        }
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-20px); }
-        }
-        @keyframes shimmer {
-            0% { background-position: -1000px 0; }
-            100% { background-position: 1000px 0; }
-        }
-        @keyframes glow {
-            0%, 100% { box-shadow: 0 0 5px rgba(212,165,116,0.5); }
-            50% { box-shadow: 0 0 20px rgba(212,165,116,0.8); }
-        }
-
-        /* Reset and base styles */
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { 
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
-            line-height: 1.6; 
-            color: #333; 
-            background: #f9f9f9; 
-            overflow-x: hidden;
-        }
-        a { text-decoration: none; color: inherit; }
-        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
-
-        /* Header */
-        header { 
-            background: linear-gradient(135deg, #fff, #fafafa); 
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1); 
-            position: fixed;
-            width: 100%; 
-            z-index: 100;
-            top: 0;
-            animation: slideInDown 0.5s ease-out;
-        }
-        @keyframes slideInDown {
-            from { transform: translateY(-100%); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
-        }
-        nav { display: flex; justify-content: space-between; align-items: center; padding: 1rem 0; }
-        .logo-container { display: flex; align-items: center; gap: 12px; animation: slideInLeft 0.6s ease-out; }
-        .logo-img { height: 50px; width: auto; transition: all 0.3s ease; }
-        .logo-img:hover { transform: scale(1.1) rotate(5deg); }
-        .logo-text { font-size: 1.6rem; font-weight: 700; background: linear-gradient(135deg, #1a472a, #d4a574); -webkit-background-clip: text; -webkit-text-fill-color: transparent; letter-spacing: 1px; }
-        nav ul { list-style: none; display: flex; }
-        nav ul li { margin-left: 2.5rem; animation: fadeInUp 0.6s ease-out; }
+      body { 
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+    line-height: 1.6; 
+    color: #333; 
+    background: #f9f9f9; 
+    overflow-x: hidden;
+}
         nav ul li:nth-child(1) { animation-delay: 0.1s; }
         nav ul li:nth-child(2) { animation-delay: 0.2s; }
         nav ul li:nth-child(3) { animation-delay: 0.3s; }
@@ -92,52 +51,72 @@
         nav ul li a:hover::after { width: 100%; }
         nav ul li a:hover { color: #d4a574; }
 
-        /* Hero Section */
-        .hero { 
-            background: linear-gradient(135deg, rgba(26,71,42,0.88), rgba(212,165,116,0.88)), url('https://source.unsplash.com/featured/?home-decoration'); 
-            background-size: cover; 
-            background-position: center; 
-            background-attachment: fixed;
-            height: 100vh; 
-            display: flex; 
-            align-items: center; 
-            justify-content: center; 
-            text-align: center; 
-            color: #fff; 
-            margin-top: 70px;
+        /* Nav & mobile toggle */
+        nav.container { display:flex; align-items:center; justify-content:space-between; gap:1rem; position:relative; }
+        nav ul { display:flex; gap:1.5rem; list-style:none; margin:0; padding:0; }
+        .nav-toggle { display: none; background: transparent; border: 0; color: #fff; font-size: 1.25rem; cursor: pointer; }
+
+        /* Hero Section (refreshed) */
+        .hero {
+            background: linear-gradient(135deg, rgba(26,71,42,0.55), rgba(212,165,116,0.06)), url('assest/logoi.jpeg');
+            background-size: cover;
+            background-position: center center;
+            min-height: 520px;
+            display: flex;
+            align-items: center;
+            color: #fff;
+            margin-top: 80px; /* account for fixed header */
             position: relative;
             overflow: hidden;
+            padding: 5rem 0;
         }
-        .hero::before {
+        .hero::before{
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="20" cy="20" r="2" fill="rgba(255,255,255,0.1)"/><circle cx="80" cy="80" r="2" fill="rgba(255,255,255,0.1)"/><circle cx="80" cy="20" r="1.5" fill="rgba(255,255,255,0.1)"/><circle cx="20" cy="80" r="1.5" fill="rgba(255,255,255,0.1)"/></svg>');
-            animation: float 6s ease-in-out infinite;
+            inset: 0;
+            background: radial-gradient(circle at 10% 20%, rgba(212,165,116,0.08), transparent 15%), linear-gradient(180deg, rgba(6,20,12,0.25), rgba(6,20,12,0.08));
+            z-index: 1;
+            pointer-events: none;
         }
-        .hero-content { 
-            position: relative; 
-            z-index: 2; 
-            animation: fadeInUp 1s ease-out;
+        .hero-grid{
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2.5rem;
+            align-items: center;
+            padding: 0 1.25rem;
+            position: relative;
+            z-index: 2;
         }
-        .hero-content h1 { 
-            font-size: 3.8rem; 
-            margin-bottom: 1rem; 
-            font-weight: 800; 
-            letter-spacing: -1.5px;
-            animation: fadeInUp 0.8s ease-out;
-            text-shadow: 2px 2px 8px rgba(0,0,0,0.3);
-        }
-        .hero-content p { 
-            font-size: 1.5rem; 
-            margin-bottom: 2.5rem; 
-            font-weight: 300;
-            animation: fadeInUp 1s ease-out;
-            animation-delay: 0.2s;
-            text-shadow: 1px 1px 4px rgba(0,0,0,0.3);
+        .hero-left{ text-align: left; padding-right: 1rem; }
+        .hero-badge{ display:inline-block; background: rgba(255,255,255,0.08); color:#fff; padding:0.35rem 0.8rem; border-radius:999px; font-weight:700; margin-bottom:1rem; backdrop-filter: blur(6px); border:1px solid rgba(255,255,255,0.06); }
+        .hero-left h1{ font-size: 3.2rem; margin: 0 0 0.75rem 0; color: #fff; line-height: 1.02; text-shadow: 0 10px 30px rgba(0,0,0,0.45); }
+        .hero-left h1 .accent{ background: linear-gradient(90deg,#fff, #d4a574); -webkit-background-clip: text; background-clip: text; color: transparent; }
+        .hero-left p{ font-size: 1.125rem; color: rgba(255,255,255,0.92); margin-bottom: 1.25rem; max-width: 540px; }
+        .hero-search{ display:flex; gap:0.75rem; align-items:center; margin: 1.25rem 0 0.75rem 0; }
+        .hero-search input{ flex:1; padding:0.9rem 1rem; border-radius: 10px; border: 1px solid rgba(255,255,255,0.15); background: rgba(255,255,255,0.06); color: #fff; outline:none; }
+        .hero-search button{ padding:0.9rem 1.2rem; border-radius: 10px; border: none; background: linear-gradient(135deg,#d4a574,#e8b88f); color:#1a472a; font-weight:800; cursor:pointer; }
+        .hero-chips{ display:flex; gap:0.5rem; margin-top:1rem; flex-wrap:wrap; }
+        .chip{ background: rgba(255,255,255,0.06); color:#fff; padding:0.4rem 0.7rem; border-radius:999px; font-weight:700; border:1px solid rgba(255,255,255,0.04); cursor:pointer; }
+        .hero-ctas{ display:flex; gap:1rem; align-items:center; margin-top:1.25rem; }
+
+        .hero-right{ position:relative; display:flex; justify-content:center; align-items:center; }
+        .hero-art{ width:100%; max-width:520px; height:420px; border-radius: 18px; overflow:hidden; box-shadow: 0 30px 80px rgba(2,10,6,0.45); transform: translateY(0); transition: transform 0.6s cubic-bezier(.2,.9,.2,1); }
+        .hero-art img{ width:100%; height:100%; object-fit:cover; display:block; }
+        .hero-deco{ position:absolute; left:-8%; top:40%; width:320px; height:320px; background: radial-gradient(circle at 30% 30%, rgba(212,165,116,0.12), transparent 30%); transform: rotate(-12deg); filter: blur(30px); pointer-events:none; }
+        .hero-art:hover{ transform: translateY(-6px); }
+
+        @media (max-width: 900px){
+            .hero-grid{ grid-template-columns: 1fr; gap: 1.5rem; text-align: center; }
+            .hero-left{ padding:0; }
+            .hero-left h1{ font-size:2.2rem; }
+            .hero-right{ order:-1; }
+            .hero-art{ max-width:420px; height:340px; margin:0 auto; }
+            .hero-deco{ display:none; }
+            .hero-search{ justify-content:center; }
+            .hero-chips{ justify-content:center; }
         }
         .btn { 
             background: linear-gradient(135deg, #d4a574, #e8b88f); 
@@ -210,100 +189,123 @@
             border-radius: 3px;
         }
 
-        /* Services */
-        .services { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2.5rem; }
-        .service { 
-            background: #fff; 
-            padding: 2.5rem; 
-            border-radius: 15px; 
-            box-shadow: 0 5px 20px rgba(0,0,0,0.08); 
-            text-align: center; 
-            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1); 
-            border: 2px solid transparent;
+        /* Product Categories (attractive cards) */
+        .services { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; align-items: stretch; }
+        .service {
             position: relative;
+            border-radius: 16px;
             overflow: hidden;
-            animation: fadeInUp 0.8s ease-out;
+            min-height: 340px;
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 1.5rem;
+            background-size: cover;
+            background-position: center;
+            box-shadow: 0 12px 40px rgba(2,10,6,0.12);
+            transition: transform 0.38s cubic-bezier(.22,.9,.3,1), box-shadow 0.38s ease, filter 0.28s ease;
+            border: 1px solid rgba(255,255,255,0.04);
+            opacity: 0; /* animated in by IntersectionObserver */
+            transform: translateY(18px);
         }
-        .service::before {
+        .service::before{ content: ''; position:absolute; inset:0; background: linear-gradient(180deg, rgba(6,20,12,0.12), rgba(6,20,12,0.4)); z-index:1; transition: opacity 0.28s ease; }
+        .service-content{ position:relative; z-index:2; display:flex; flex-direction:column; gap:8px; }
+        .service .icon-wrap{ width:64px; height:64px; border-radius:12px; display:flex; align-items:center; justify-content:center; background: rgba(255,255,255,0.12); color:#fff; font-size:1.6rem; margin-bottom:6px; }
+        .service h3{ margin:0; font-size:1.25rem; font-weight:800; color:#fff; }
+        .service p{ margin:0; color: rgba(255,255,255,0.92); font-weight:600; }
+        .service .learn{ margin-top:12px; display:inline-block; align-self:flex-start; background: rgba(255,255,255,0.08); color:#fff; padding:8px 12px; border-radius:999px; text-decoration:none; font-weight:800; border:1px solid rgba(255,255,255,0.06); }
+        .service:hover{ transform: translateY(-10px) scale(1.02); box-shadow: 0 30px 80px rgba(2,10,6,0.28); filter: saturate(1.06); }
+        @media (max-width: 900px){ .services{ grid-template-columns: repeat(2, 1fr); } }
+        @media (max-width: 600px){ .services{ grid-template-columns: 1fr; } .service{ min-height:260px; padding:1rem; } .service .icon-wrap{ width:52px; height:52px; } }
+
+        /* Portfolio (refreshed) */
+        .portfolio { background: linear-gradient(135deg, #f9f7f4 0%, #fdfbf8 100%); position: relative; }
+        .portfolio::after {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
-            width: 100%;
-            height: 3px;
-            background: linear-gradient(90deg, #d4a574, #1a472a);
-            transform: scaleX(0);
-            transform-origin: left;
-            transition: transform 0.4s ease;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                radial-gradient(circle at 15% 20%, rgba(212,165,116,0.04) 0%, transparent 30%),
+                radial-gradient(circle at 85% 85%, rgba(212,165,116,0.04) 0%, transparent 30%);
+            pointer-events: none;
+            z-index: 0;
         }
-        .service:hover { 
-            transform: translateY(-12px); 
-            box-shadow: 0 15px 40px rgba(212,165,116,0.2);
-            border-color: #d4a574;
-        }
-        .service:hover::before { transform: scaleX(1); }
-        .service i { 
-            font-size: 3.8rem; 
-            color: #d4a574; 
-            margin-bottom: 1.5rem;
-            transition: all 0.4s ease;
-            animation: pulse 2s ease-in-out infinite;
-        }
-        .service:hover i { transform: scale(1.2) rotate(10deg); animation: none; }
-        .service h3 { color: #1a472a; font-size: 1.5rem; margin-bottom: 1rem; font-weight: 700; }
-        .service p { color: #666; line-height: 1.8; font-weight: 500; }
-
-        /* Portfolio */
-        .portfolio { background: linear-gradient(135deg, #f0ede7, #faf8f3); }
+        .portfolio .container { position: relative; z-index: 1; }
         .portfolio-grid { 
             display: grid; 
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); 
+            grid-template-columns: repeat(3, 1fr); 
             gap: 2rem;
+            align-items: stretch;
         }
         .portfolio-item { 
             position: relative; 
             overflow: hidden; 
-            border-radius: 15px; 
+            border-radius: 16px; 
             cursor: pointer;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
-            animation: fadeInUp 0.8s ease-out;
-            transition: all 0.4s ease;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+            transition: all 0.42s cubic-bezier(.22,.9,.3,1);
+            border: 1px solid rgba(255,255,255,0.5);
+            opacity: 0; /* animated by IntersectionObserver */
+            transform: translateY(20px);
+            min-height: 280px;
         }
-        .portfolio-item:hover { transform: translateY(-10px); }
+        .portfolio-item:hover { transform: translateY(-12px) scale(1.02); box-shadow: 0 25px 60px rgba(0,0,0,0.15); }
         .portfolio-item img { 
             width: 100%; 
-            height: 250px; 
+            height: 100%;
             object-fit: cover; 
-            transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
-            filter: brightness(0.9);
+            transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1), filter 0.3s ease;
+            filter: brightness(0.85) saturate(0.98);
         }
         .portfolio-item:hover img { 
-            transform: scale(1.15) rotate(2deg);
-            filter: brightness(1);
+            transform: scale(1.12) rotate(1deg);
+            filter: brightness(1) saturate(1.15);
         }
         .overlay { 
             position: absolute; 
-            top: 0; 
-            left: 0; 
-            width: 100%; 
-            height: 100%; 
-            background: linear-gradient(135deg, rgba(26,71,42,0.95), rgba(212,165,116,0.9)); 
+            inset: 0;
+            background: linear-gradient(135deg, rgba(26,71,42,0.88) 0%, rgba(212,165,116,0.75) 100%); 
             display: flex; 
+            flex-direction: column;
             align-items: center; 
-            justify-content: center; 
+            justify-content: center;
+            gap: 16px;
             opacity: 0; 
-            transition: opacity 0.4s ease;
-            backdrop-filter: blur(5px);
+            transition: opacity 0.38s cubic-bezier(.22,.9,.3,1);
+            backdrop-filter: blur(8px);
+            z-index: 2;
         }
         .portfolio-item:hover .overlay { opacity: 1; }
         .overlay h3 { 
             color: #fff; 
-            font-size: 1.5rem;
-            font-weight: 700;
-            animation: slideInUp 0.4s ease-out;
+            font-size: 1.35rem;
+            font-weight: 800;
+            margin: 0;
+            letter-spacing: 0.3px;
         }
+        .overlay-cta {
+            background: rgba(255,255,255,0.15);
+            color: #fff;
+            padding: 8px 14px;
+            border-radius: 999px;
+            font-weight: 800;
+            text-decoration: none;
+            border: 1px solid rgba(255,255,255,0.2);
+            font-size: 0.85rem;
+            transition: all 0.3s ease;
+        }
+        .overlay-cta:hover {
+            background: rgba(255,255,255,0.25);
+            border-color: rgba(255,255,255,0.4);
+        }
+        @media (max-width: 900px){ .portfolio-grid { grid-template-columns: repeat(2, 1fr); gap: 1.5rem; } }
+        @media (max-width: 600px){ .portfolio-grid { grid-template-columns: 1fr; } .portfolio-item { min-height: 240px; } }
 
-        /* Why Choose Us */
+        /* Why Choose Us (redesigned) */
         .why-choose { 
             background: linear-gradient(135deg, #1a472a 0%, #2d5e3f 100%); 
             color: #fff;
@@ -318,159 +320,253 @@
             right: 0;
             bottom: 0;
             background-image: 
-                radial-gradient(circle at 20% 50%, rgba(212,165,116,0.1) 0%, transparent 50%),
-                radial-gradient(circle at 80% 80%, rgba(212,165,116,0.1) 0%, transparent 50%);
+                radial-gradient(circle at 20% 50%, rgba(212,165,116,0.08) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(212,165,116,0.08) 0%, transparent 50%);
             pointer-events: none;
+            z-index: 0;
         }
-        .why-choose .section-title { color: #fff; }
+        .why-choose .section-title { color: #fff; position: relative; z-index: 1; }
         .why-choose .section-title::after { background: linear-gradient(90deg, #d4a574, #fff); }
         .features { 
             display: grid; 
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); 
+            grid-template-columns: repeat(3, 1fr); 
             gap: 2.5rem;
             position: relative;
             z-index: 1;
         }
         .feature { 
             text-align: center;
-            animation: fadeInUp 0.8s ease-out;
-            padding: 2rem;
-            border-radius: 10px;
-            background: rgba(255,255,255,0.05);
+            padding: 2.25rem 1.75rem;
+            border-radius: 16px;
+            background: rgba(255,255,255,0.06);
             backdrop-filter: blur(10px);
-            border: 1px solid rgba(212,165,116,0.2);
-            transition: all 0.4s ease;
+            border: 1px solid rgba(212,165,116,0.25);
+            transition: all 0.42s cubic-bezier(.22,.9,.3,1);
+            opacity: 0;
+            transform: translateY(20px);
+            position: relative;
+            overflow: hidden;
+        }
+        .feature::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, #d4a574, transparent);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.35s ease;
         }
         .feature:hover {
-            background: rgba(212,165,116,0.1);
-            transform: translateY(-5px);
-            border-color: rgba(212,165,116,0.5);
+            background: rgba(212,165,116,0.15);
+            transform: translateY(-12px);
+            border-color: rgba(212,165,116,0.6);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
         }
+        .feature:hover::before { transform: scaleX(1); }
         .feature-icon { 
-            font-size: 3.5rem; 
+            width: 72px;
+            height: 72px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, rgba(212,165,116,0.2), rgba(212,165,116,0.08));
+            border-radius: 14px;
+            font-size: 1.8rem; 
             color: #d4a574; 
-            margin-bottom: 1rem;
-            transition: all 0.4s ease;
+            margin: 0 auto 1.2rem;
+            transition: all 0.42s cubic-bezier(.22,.9,.3,1);
+            border: 1px solid rgba(212,165,116,0.3);
         }
-        .feature:hover .feature-icon { transform: scale(1.2) rotate(-10deg); animation: pulse 0.6s ease-out; }
+        .feature:hover .feature-icon { 
+            transform: scale(1.15) rotate(-8deg); 
+            background: linear-gradient(135deg, rgba(212,165,116,0.35), rgba(212,165,116,0.15));
+            box-shadow: 0 8px 24px rgba(212,165,116,0.2);
+        }
         .feature h3 { 
-            margin-bottom: 0.8rem; 
-            font-size: 1.3rem;
-            font-weight: 700;
+            margin: 0 0 0.8rem 0;
+            font-size: 1.25rem;
+            font-weight: 800;
+            letter-spacing: 0.2px;
         }
-        .feature p { font-weight: 500; opacity: 0.95; }
+        .feature p { 
+            margin: 0;
+            font-weight: 600; 
+            opacity: 0.92;
+            line-height: 1.6;
+        }
+        @media (max-width: 900px){ .features { grid-template-columns: repeat(2, 1fr); gap: 2rem; } }
+        @media (max-width: 600px){ .features { grid-template-columns: 1fr; } .feature-icon { width: 60px; height: 60px; } }
 
-        /* Testimonials */
-        .testimonials { background: linear-gradient(135deg, #f9f9f9, #fff); }
+        /* Testimonials (redesigned) */
+        .testimonials { background: linear-gradient(135deg, #f9f7f4 0%, #fdfbf8 100%); position: relative; }
+        .testimonials::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                radial-gradient(circle at 20% 50%, rgba(212,165,116,0.04) 0%, transparent 30%),
+                radial-gradient(circle at 80% 80%, rgba(212,165,116,0.04) 0%, transparent 30%);
+            pointer-events: none;
+            z-index: 0;
+        }
+        .testimonials .container { position: relative; z-index: 1; }
         .testimonials-grid { 
             display: grid; 
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
-            gap: 2.5rem;
+            grid-template-columns: repeat(3, 1fr); 
+            gap: 2rem;
+            align-items: stretch;
         }
         .testimonial { 
             background: #fff; 
             padding: 2.5rem; 
-            border-radius: 15px; 
-            border-left: 5px solid #d4a574;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
-            animation: fadeInUp 0.8s ease-out;
-            transition: all 0.4s ease;
+            border-radius: 16px; 
+            box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+            transition: all 0.42s cubic-bezier(.22,.9,.3,1);
             position: relative;
             overflow: hidden;
+            opacity: 0;
+            transform: translateY(20px);
+            border: 1px solid rgba(212,165,116,0.12);
         }
         .testimonial::before {
             content: '';
             position: absolute;
-            top: 0;
-            right: 0;
-            width: 100px;
-            height: 100px;
-            background: radial-gradient(circle, rgba(212,165,116,0.1) 0%, transparent 70%);
+            top: -50%;
+            right: -50px;
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, rgba(212,165,116,0.08) 0%, transparent 70%);
             border-radius: 50%;
         }
+        .testimonial::after {
+            content: '\2605\2605\2605\2605\2605';
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            color: #d4a574;
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+            opacity: 0.8;
+        }
         .testimonial:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 15px 40px rgba(212,165,116,0.2);
+            transform: translateY(-12px);
+            box-shadow: 0 25px 60px rgba(0,0,0,0.12);
+            border-color: rgba(212,165,116,0.3);
         }
         .testimonial-text { 
-            color: #666; 
-            font-size: 1rem; 
+            color: #555; 
+            font-size: 1.05rem; 
             line-height: 1.8; 
-            margin-bottom: 1.5rem; 
+            margin-bottom: 1.75rem; 
             font-style: italic;
             position: relative;
             z-index: 1;
         }
         .testimonial-text::before {
-            content: '"';
-            font-size: 3rem;
+            content: '\201C';
+            font-size: 3.5rem;
             color: #d4a574;
-            opacity: 0.2;
+            opacity: 0.12;
             position: absolute;
-            top: -10px;
-            left: -10px;
+            top: -20px;
+            left: -15px;
+            font-family: Georgia, serif;
         }
-        .testimonial-author { 
-            font-weight: 700; 
-            color: #1a472a;
+        .testimonial-author-wrap {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
             position: relative;
             z-index: 1;
         }
+        .author-avatar {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #d4a574, #e8b88f);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-weight: 800;
+            font-size: 1.2rem;
+        }
+        .testimonial-author { 
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+        .author-name { 
+            font-weight: 800; 
+            color: #1a472a;
+            font-size: 1rem;
+        }
+        .author-title { 
+            font-weight: 600; 
+            color: #999;
+            font-size: 0.85rem;
+        }
+        @media (max-width: 900px){ .testimonials-grid { grid-template-columns: repeat(2, 1fr); gap: 1.5rem; } }
+        @media (max-width: 600px){ .testimonials-grid { grid-template-columns: 1fr; } }
 
-        /* Contact */
-        .contact-section { 
-            background: linear-gradient(135deg, #f0ede7, #fff); 
+        /* Contact (redesigned) */
+        .contact-section {
+            background: linear-gradient(135deg, #fbfaf8 0%, #f5f4f2 100%);
             position: relative;
         }
-        .contact-content { 
-            display: grid; 
-            grid-template-columns: 1fr 1fr; 
-            gap: 3.5rem; 
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2.5rem;
             align-items: start;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.25rem;
+            position: relative;
+            z-index: 2;
         }
-        .contact-info {
-            animation: slideInLeft 0.8s ease-out;
-        }
-        .contact-info h3 { 
-            color: #1a472a; 
-            margin-bottom: 2rem; 
-            font-size: 1.6rem;
-            font-weight: 700;
-        }
-        .contact-item { 
-            margin-bottom: 2.5rem;
+        .contact-card {
+            background: linear-gradient(180deg, #fff, #fff);
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 18px 50px rgba(2,10,6,0.06);
+            border: 1px solid rgba(10,10,10,0.03);
             display: flex;
+            flex-direction: column;
             gap: 1rem;
             animation: fadeInUp 0.8s ease-out;
         }
-        .contact-item i { 
-            color: #d4a574; 
-            font-size: 1.5rem;
-            margin-top: 3px;
-            animation: glow 3s ease-in-out infinite;
+        .contact-card h3 { color: #1a472a; margin: 0 0 0.5rem 0; font-size: 1.4rem; }
+        .contact-card p { margin: 0 0 1rem 0; color: #555; }
+        .contact-item { display:flex; gap:0.85rem; align-items:flex-start; margin-bottom:1rem; }
+        .contact-item i { color:#d4a574; font-size:1.25rem; margin-top:3px; }
+        .contact-quick { display:flex; gap:0.5rem; flex-wrap:wrap; margin-top:0.5rem; }
+        .contact-pill { background: rgba(26,71,42,0.06); color: #1a472a; padding:0.45rem 0.7rem; border-radius:999px; font-weight:700; border:1px solid rgba(26,71,42,0.04); }
+
+        .contact-form {
+            background: linear-gradient(180deg, rgba(26,71,42,0.03), rgba(26,71,42,0.02));
+            padding: 2rem;
+            border-radius: 16px;
+            box-shadow: 0 18px 50px rgba(2,10,6,0.06);
+            border: 1px solid rgba(10,10,10,0.03);
+            animation: fadeInUp 0.8s ease-out;
         }
-        .contact-form { 
-            max-width: 100%;
-            animation: slideInRight 0.8s ease-out;
+        .contact-form .form-row { display:flex; gap:0.85rem; }
+        .contact-form .form-row .field { flex:1; }
+        .contact-form input, .contact-form textarea {
+            width: 100%; padding:1rem 1rem; margin-bottom:0.9rem; border-radius:10px; border:1px solid rgba(20,20,20,0.06); background:#fff; box-shadow:inset 0 1px 0 rgba(255,255,255,0.6); font-size:0.95rem; transition: box-shadow 0.18s ease, transform 0.18s ease;
         }
-        .contact-form input, .contact-form textarea { 
-            width: 100%; 
-            padding: 1.2rem; 
-            margin-bottom: 1.2rem; 
-            border: 2px solid #ddd; 
-            border-radius: 10px; 
-            font-family: inherit;
-            font-size: 0.95rem;
-            transition: all 0.3s ease;
-            background: rgba(255,255,255,0.8);
-        }
-        .contact-form input:focus, .contact-form textarea:focus { 
-            outline: none; 
-            border-color: #d4a574; 
-            box-shadow: 0 0 15px rgba(212, 165, 116, 0.3);
-            background: #fff;
-        }
-        .contact-form button { width: 100%; animation: fadeInUp 1.2s ease-out; animation-delay: 0.2s; }
+        .contact-form input:focus, .contact-form textarea:focus { outline:none; box-shadow:0 6px 30px rgba(26,71,42,0.08); transform: translateY(-2px); border-color:#d4a574; }
+        .contact-form textarea { min-height:140px; resize:vertical; }
+        .contact-form .btn { padding:0.95rem 1.4rem; border-radius:10px; font-size:0.95rem; }
+        .contact-note { color:#666; font-size:0.95rem; margin-top:0.5rem; }
+        @media (max-width: 900px) { .contact-grid { grid-template-columns: 1fr; } }
 
         /* Footer */
         footer { 
@@ -558,75 +654,225 @@
         .contact-form input, .contact-form textarea { width: 100%; padding: 1rem; margin-bottom: 1rem; border: 1px solid #ddd; border-radius: 5px; }
         .contact-form button { width: 100%; }
 
-        /* Footer */
-        footer { background: #2c3e50; color: #fff; text-align: center; padding: 2rem 0; }
+        /* Footer (redesigned) */
+        .site-footer { background: linear-gradient(180deg,#0f2f1e 0%, #12351f 60%); color:#fff; padding:3.5rem 0 1.5rem; position:relative; }
+        .site-footer .footer-top { max-width:1200px; margin:0 auto; padding:0 1.25rem 2rem; display:grid; grid-template-columns: 1.2fr 1fr 1fr 1fr; gap:1.5rem; align-items:start; }
+        .footer-brand { display:flex; flex-direction:column; gap:0.75rem; }
+        .footer-brand .logo-img {  }
+        .footer-brand .logo-text { color:#fff; font-weight:900; font-size:1.05rem; }
+        .brand-desc { color: rgba(255,255,255,0.9); max-width:320px; margin-top:6px; }
+        .footer-links h4, .footer-contact h4, .footer-newsletter h4 { color:#d4a574; margin-bottom:0.75rem; font-size:1.05rem; }
+        .footer-links ul { list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:0.6rem; }
+        .footer-links ul a { color: rgba(255,255,255,0.95); text-decoration:none; transition: color 0.18s ease; }
+        .footer-links ul a:hover { color:#e8b88f; }
+        .footer-contact p { margin:0; color:rgba(255,255,255,0.92); }
+        .footer-newsletter form { display:flex; gap:0.5rem; align-items:center; }
+        .footer-newsletter input[type="email"] { flex:1; padding:0.6rem 0.85rem; border-radius:8px; border:1px solid rgba(255,255,255,0.08); background:rgba(255,255,255,0.04); color:#fff; }
+        .footer-newsletter button { padding:0.6rem 0.9rem; border-radius:8px; background:linear-gradient(135deg,#d4a574,#e8b88f); color:#12351f; font-weight:800; border:0; cursor:pointer; }
+        .socials { display:flex; gap:0.6rem; align-items:center; }
+        .socials a { display:inline-flex; align-items:center; justify-content:center; width:36px; height:36px; border-radius:8px; background: rgba(255,255,255,0.06); color:#fff; text-decoration:none; }
+        .footer-bottom { border-top:1px solid rgba(255,255,255,0.04); margin-top:1rem; padding-top:1rem; display:flex; gap:1rem; align-items:center; justify-content:space-between; max-width:1200px; margin-left:auto; margin-right:auto; padding:1rem 1.25rem; }
+        .footer-bottom .copyright { color:rgba(255,255,255,0.8); font-size:0.95rem; }
+        .back-to-top { color:rgba(255,255,255,0.9); text-decoration:none; font-weight:700; }
+        @media (max-width: 1000px) { .site-footer .footer-top { grid-template-columns: 1fr 1fr; } .footer-top .brand-desc { max-width:100%; } }
+        @media (max-width: 640px) { .site-footer .footer-top { grid-template-columns: 1fr; } .footer-bottom { flex-direction:column; gap:0.5rem; align-items:center; } }
 
         /* Responsive */
         @media (max-width: 768px) { 
             .hero-content h1 { font-size: 2rem; }
             nav ul { display: none; } /* Simple mobile nav; expand if needed */
         }
+        @media (max-width: 768px) {
+            .nav-toggle { display: block; }
+        }
+
+        header.site-header { position: fixed; top: 0; left: 0; right: 0; z-index: 1100; background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.02)); backdrop-filter: blur(6px); border-bottom: 1px solid rgba(0,0,0,0.04); }
+        header.site-header nav.container { display:flex; align-items:center; justify-content:space-between; gap:1rem; padding:0.75rem 1.25rem; max-width:1200px; margin:0 auto; }
+        .logo { display:flex; align-items:center; gap:0.6rem; text-decoration:none; }
+        .logo-img { width:300px; height:50px; object-fit:contain; display:block; }
+        .logo-text { color:#1a472a; font-weight:800; font-size:1.05rem; letter-spacing:0.2px; }
+        .nav-links { display:flex; gap:1.25rem; list-style:none; margin:0; padding:0; align-items:center; }
+        .nav-links li { margin:0; }
+        .nav-links li a { color:#1a472a; padding:0.45rem 0.25rem; font-weight:700; text-decoration:none; transition: color 0.22s ease; }
+        .nav-links li a:hover { color:#d4a574; }
+        .cta-btn { display:inline-block; background: linear-gradient(135deg,#d4a574,#e8b88f); color:#1a472a; padding:0.55rem 1rem; border-radius:999px; font-weight:800; text-decoration:none; box-shadow:0 6px 18px rgba(212,165,116,0.25); border:2px solid transparent; }
+        .nav-toggle { display:none; background: transparent; border: 0; color: #1a472a; font-size: 1.25rem; cursor: pointer; }
+
+        @media (max-width: 880px) {
+            .nav-links { display: none; }
+            .cta-btn { display: none; }
+            .nav-toggle { display: block; }
+            nav.nav-open .nav-links { display:flex; position: absolute; right: 1rem; top: 64px; background: #fff; padding: 0.75rem 1rem; border-radius: 8px; box-shadow: 0 10px 40px rgba(0,0,0,0.12); flex-direction: column; min-width: 180px; }
+            nav.nav-open .nav-links li { margin: 0.35rem 0; }
+            nav.nav-open .nav-links li a { color: #1a472a; padding: 0.35rem 0; }
+        }
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"> <!-- For icons -->
 </head>
 <body>
-    <header>
-        <nav class="container">
-            <div class="logo-container">
+    <header class="site-header">
+        <nav class="container" id="mainNav" aria-label="Main navigation">
+            <a href="#home" class="logo" aria-label="S.S. Enterprises Home">
                 <img src="assest/logo.svg" alt="S.S. Enterprises Logo" class="logo-img">
-                <!-- <div class="logo-text">S.S. Enterprises</div> -->
-            </div>
-            <ul>
+                <!-- <span class="logo-text">S.S. Enterprises</span> -->
+            </a>
+
+            <button class="nav-toggle" aria-label="Toggle menu"><i class="fas fa-bars"></i></button>
+
+            <ul class="nav-links">
                 <li><a href="#home">Home</a></li>
                 <li><a href="#products">Products</a></li>
                 <li><a href="#about">About</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
+
+            <a href="#contact" class="cta-btn">Get Quote</a>
         </nav>
     </header>
 
     <section id="home" class="hero">
-        <div class="hero-content">
-            <h1>Premium Home Decoration Wholesale</h1>
-            <p>Your one-stop destination for high-quality home décor products at wholesale prices</p>
-            <a href="#products" class="btn">View Products</a>
-            <a href="#contact" class="btn btn-secondary">Get in Touch</a>
+        <div class="hero-grid">
+            <div class="hero-left">
+                <div class="hero-badge">Wholesale • Bulk Ready</div>
+                <h1>Premium <span class="accent">Home Decoration</span> Wholesale</h1>
+                <p>Your one-stop destination for curated, high-quality home decore at wholesale rates — designed for retailers and designers.</p>
+
+                <form class="hero-search" role="search" onsubmit="event.preventDefault(); window.location='#products';">
+                    <input type="search" placeholder="Search products, categories or styles" aria-label="Search products">
+                    <button type="submit">Search</button>
+                </form>
+
+                <div class="hero-chips" aria-hidden="false">
+                    <button class="chip">Lighting</button>
+                    <button class="chip">Furniture</button>
+                    <button class="chip">Wall Art</button>
+                    <button class="chip">Textiles</button>
+                </div>
+
+                <div class="hero-ctas">
+                    <a href="#products" class="btn">Browse Collections</a>
+                    <a href="#contact" class="btn btn-secondary">Get in Touch</a>
+                </div>
+
+                <div style="margin-top:14px; color: rgba(255,255,255,0.92); font-weight:600;">Trusted by retailers across India • Free bulk shipping</div>
+            </div>
+
+            <div class="hero-right" aria-hidden="true">
+                <div class="hero-art">
+                    <img src="https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcTTe8qSoWkh2dXmONO8IhCPiOdUmLBk4A4xGN7a1RdwiDCyUEcNImJ6wcNkptFTfaBxPzZ5S8rK99BF5tWifKK9xQH1OUYWxw" alt="Featured collection">
+                </div>
+                <div class="hero-deco" aria-hidden="true"></div>
+            </div>
         </div>
+
+        <a href="#products" aria-label="Scroll to products" style="position:absolute;left:50%;transform:translateX(-50%);bottom:22px;z-index:3;color:rgba(255,255,255,0.9);text-decoration:none;">
+            <div style="display:flex;flex-direction:column;align-items:center;gap:6px;">
+                <span style="font-weight:700;">Explore Collections</span>
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 5v14M5 12l7 7 7-7" stroke="rgba(255,255,255,0.95)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+        </a>
     </section>
 
     <section id="products">
         <div class="container">
             <h2 class="section-title">Our Product Categories</h2>
             <div class="services">
-                <div class="service">
-                    <i class="fas fa-light-ceiling"></i>
-                    <h3>Lighting Solutions</h3>
-                    <p>Beautiful ceiling fans, chandeliers, and decorative lighting fixtures for every style and budget.</p>
+                <div class="service" style="background-image:url('https://images.unsplash.com/photo-1747228284879-c9019bc70ea2');">
+                    <div class="service-content">
+                        <div class="icon-wrap"><i class="fas fa-lightbulb"></i></div>
+                        <h3>Lighting Solutions</h3>
+                        <p>Chandeliers, lamps and decorative lighting to brighten any space.</p>
+                        <a href="#products" class="learn">Shop Lighting</a>
+                    </div>
                 </div>
-                <div class="service">
-                    <i class="fas fa-couch"></i>
-                    <h3>Furniture & Décor</h3>
-                    <p>Quality furniture pieces and decorative accessories to enhance any living space.</p>
+
+                <div class="service" style="background-image:url('https://images.unsplash.com/photo-1660324466502-d09dff329587');">
+                    <div class="service-content">
+                        <div class="icon-wrap"><i class="fas fa-couch"></i></div>
+                        <h3>Furniture & decore</h3>
+                        <p>Stylish furniture and decore items curated for retailers and designers.</p>
+                        <a href="#products" class="learn">Explore Furniture</a>
+                    </div>
                 </div>
-                <div class="service">
-                    <i class="fas fa-image"></i>
-                    <h3>Wall Décor</h3>
-                    <p>Wall hangings, paintings, mirrors, and artistic pieces for modern and traditional homes.</p>
+
+                <div class="service" style="background-image:url('https://images.unsplash.com/photo-1749496223160-679300ae70b6?');">
+                    <div class="service-content">
+                        <div class="icon-wrap"><i class="fas fa-image"></i></div>
+                        <h3>Wall decore</h3>
+                        <p>Wall hangings, mirrors and art pieces to uplift interiors.</p>
+                        <a href="#products" class="learn">See Wall Art</a>
+                    </div>
                 </div>
-                <div class="service">
-                    <i class="fas fa-wind"></i>
-                    <h3>Home Textiles</h3>
-                    <p>Curtains, cushions, rugs, and soft furnishings with trendy designs and premium quality.</p>
+<!--            <div class="service" style="background-image:url('https://www.d3dynamic.com/images/blog/blog_img2.webp');">
+                    <div class="service-content">
+                        <div class="icon-wrap"><i class="fas fa-wind"></i></div>
+                        <h3>Home Textiles</h3>
+                        <p>Premium curtains, cushions and rugs in trending designs.</p>
+                        <a href="#products" class="learn">Browse Textiles</a>
+                    </div>
                 </div>
-                <div class="service">
-                    <i class="fas fa-plant-wilt"></i>
-                    <h3>Garden & Outdoor</h3>
-                    <p>Outdoor furniture, garden décor, and landscaping accessories for beautiful exteriors.</p>
+
+                <div class="service" style="background-image:url('https://media.designcafe.com/wp-content/uploads/2020/04/16093625/garden-ideas-for-small-spaces.jpg');">
+                    <div class="service-content">
+                        <div class="icon-wrap"><i class="fas fa-leaf"></i></div>
+                        <h3>Garden & Outdoor</h3>
+                        <p>Outdoor furniture and decore crafted for durable, beautiful exteriors.</p>
+                        <a href="#products" class="learn">Outdoor Range</a>
+                    </div>
+                </div> -->
+
+                <div class="service" style="background-image:url('https://www.jkath.com/wp-content/uploads/2022/02/3b9aef_61cbaa43a0f54cbfbb42773e51e8807f-mv2.jpg');">
+                    <div class="service-content">
+                        <div class="icon-wrap"><i class="fas fa-utensils"></i></div>
+                        <h3>Kitchen & Bath</h3>
+                        <p>Decorative accessories and styling pieces for kitchens and bathrooms.</p>
+                        <a href="#products" class="learn">Kitchen & Bath</a>
+                    </div>
                 </div>
-                <div class="service">
-                    <i class="fas fa-kitchen-set"></i>
-                    <h3>Kitchen & Bath</h3>
-                    <p>Decorative items and accessories to style your kitchen and bathroom spaces.</p>
+
+                <div class="service" style="background-image:url('https://image.made-in-china.com/203f0j00bSjkdqztrLoi/Modern-Style-Interior-PVC-WPC-Wall-Cladding-Panels-for-Home-Office-Decoration.webp');">
+                    <div class="service-content">
+                        <div class="icon-wrap"><i class="fas fa-square"></i></div>
+                        <h3>PVC Panel</h3>
+                        <p>Premium PVC panels for walls and interiors with modern designs.</p>
+                        <a href="#products" class="learn">Shop PVC Panel</a>
+                    </div>
+                </div>
+
+                <div class="service" style="background-image:url('https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?q=80&w=1000&auto=format&fit=crop');">
+                    <div class="service-content">
+                        <div class="icon-wrap"><i class="fas fa-home"></i></div>
+                        <h3>Flooring Mat</h3>
+                        <p>Durable and stylish flooring mats for every room and space.</p>
+                        <a href="#products" class="learn">Explore Flooring</a>
+                    </div>
+                </div>
+
+                <div class="service" style="background-image:url('https://images.unsplash.com/photo-1578749556568-bc2c40e68b61?q=80&w=1000&auto=format&fit=crop');">
+                    <div class="service-content">
+                        <div class="icon-wrap"><i class="fas fa-scroll"></i></div>
+                        <h3>Customized Roller</h3>
+                        <p>Bespoke roller blinds customized to your exact specifications and style.</p>
+                        <a href="#products" class="learn">View Rollers</a>
+                    </div>
+                </div>
+
+                <div class="service" style="background-image:url('https://images.unsplash.com/photo-1566073771259-6a8506099945?q=80&w=1000&auto=format&fit=crop');">
+                    <div class="service-content">
+                        <div class="icon-wrap"><i class="fas fa-sun"></i></div>
+                        <h3>Blinds Glass</h3>
+                        <p>Premium glass blinds combining elegance with light control functionality.</p>
+                        <a href="#products" class="learn">Shop Blinds</a>
+                    </div>
+                </div>
+
+                <div class="service" style="background-image:url('https://m.media-amazon.com/images/I/51Wl3gA-4HL.jpg');">
+                    <div class="service-content">
+                        <div class="icon-wrap"><i class="fas fa-paint-brush"></i></div>
+                        <h3>Wallpaper Sticker</h3>
+                        <p>Self-adhesive wallpaper stickers for easy, trendy wall transformations.</p>
+                        <a href="#products" class="learn">Browse Stickers</a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -637,28 +883,91 @@
             <h2 class="section-title">Featured Collections</h2>
             <div class="portfolio-grid">
                 <div class="portfolio-item">
-                    <img src="https://source.unsplash.com/featured/?home-decoration-lights" alt="Lighting Collection">
-                    <div class="overlay"><h3>Modern Lighting</h3></div>
+                    <img src="https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcTTe8qSoWkh2dXmONO8IhCPiOdUmLBk4A4xGN7a1RdwiDCyUEcNImJ6wcNkptFTfaBxPzZ5S8rK99BF5tWifKK9xQH1OUYWxw" alt="Modern Lighting Collection">
+                    <div class="overlay">
+                        <h3>Modern Lighting</h3>
+                        <a href="#products" class="overlay-cta">View Collection</a>
+                    </div>
                 </div>
+
                 <div class="portfolio-item">
-                    <img src="https://source.unsplash.com/featured/?home-furniture" alt="Furniture">
-                    <div class="overlay"><h3>Stylish Furniture</h3></div>
+                    <img src="https://images.unsplash.com/photo-1631679706909-1844bbd07221?q=80&w=1092&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Stylish Furniture">
+                    <div class="overlay">
+                        <h3>Stylish Furniture</h3>
+                        <a href="#products" class="overlay-cta">View Collection</a>
+                    </div>
                 </div>
+
                 <div class="portfolio-item">
-                    <img src="https://source.unsplash.com/featured/?wall-art-decoration" alt="Wall Décor">
-                    <div class="overlay"><h3>Wall Art</h3></div>
+                    <img src="https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcSOdfQzuyXM4AsuvkxHNjCkcg0aK2AROiL6GvXIjG6EtPWih-4ScGpDFbcDiPZEnTRCXeKCusW0AkSRDSYGj20Uh-sGfCEewGHhUiEfepM" alt="Wall Art & decore">
+                    <div class="overlay">
+                        <h3>Wall Art</h3>
+                        <a href="#products" class="overlay-cta">View Collection</a>
+                    </div>
                 </div>
-                <div class="portfolio-item">
-                    <img src="https://source.unsplash.com/featured/?home-curtains" alt="Textiles">
-                    <div class="overlay"><h3>Premium Textiles</h3></div>
+
+                <!-- <div class="portfolio-item">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSPHePPy_1sME4w0YU66rrggRMxJ1MV9UYBSw&s" alt="Premium Textiles">
+                    <div class="overlay">
+                        <h3>Premium Textiles</h3>
+                        <a href="#products" class="overlay-cta">View Collection</a>
+                    </div>
                 </div>
+
                 <div class="portfolio-item">
-                    <img src="https://source.unsplash.com/featured/?garden-outdoor-decor" alt="Garden">
-                    <div class="overlay"><h3>Garden Collection</h3></div>
+                    <img src="https://media.designcafe.com/wp-content/uploads/2020/04/16093625/garden-ideas-for-small-spaces.jpg" alt="Garden & Outdoor">
+                    <div class="overlay">
+                        <h3>Garden Collection</h3>
+                        <a href="#products" class="overlay-cta">View Collection</a>
+                    </div>
+                </div> -->
+
+                <div class="portfolio-item">
+                    <img src="https://www.jkath.com/wp-content/uploads/2022/02/3b9aef_61cbaa43a0f54cbfbb42773e51e8807f-mv2.jpg" alt="Kitchen & Bath decore">
+                    <div class="overlay">
+                        <h3>Kitchen & Bath</h3>
+                        <a href="#products" class="overlay-cta">View Collection</a>
+                    </div>
                 </div>
+
                 <div class="portfolio-item">
-                    <img src="https://source.unsplash.com/featured/?kitchen-decor" alt="Kitchen">
-                    <div class="overlay"><h3>Kitchen Accessories</h3></div>
+                    <img src="https://image.made-in-china.com/203f0j00bSjkdqztrLoi/Modern-Style-Interior-PVC-WPC-Wall-Cladding-Panels-for-Home-Office-Decoration.webp" alt="PVC Panel Collection">
+                    <div class="overlay">
+                        <h3>PVC Panel</h3>
+                        <a href="#products" class="overlay-cta">View Collection</a>
+                    </div>
+                </div>
+
+                <div class="portfolio-item">
+                    <img src="https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?q=80&w=1000&auto=format&fit=crop" alt="Flooring Mat Collection">
+                    <div class="overlay">
+                        <h3>Flooring Mat</h3>
+                        <a href="#products" class="overlay-cta">View Collection</a>
+                    </div>
+                </div>
+
+                <div class="portfolio-item">
+                    <img src="https://images.unsplash.com/photo-1578749556568-bc2c40e68b61?q=80&w=1000&auto=format&fit=crop" alt="Customized Roller">
+                    <div class="overlay">
+                        <h3>Customized Roller</h3>
+                        <a href="#products" class="overlay-cta">View Collection</a>
+                    </div>
+                </div>
+
+                <div class="portfolio-item">
+                    <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?q=80&w=1000&auto=format&fit=crop" alt="Blinds Glass Collection">
+                    <div class="overlay">
+                        <h3>Blinds Glass</h3>
+                        <a href="#products" class="overlay-cta">View Collection</a>
+                    </div>
+                </div>
+
+                <div class="portfolio-item">
+                    <img src="https://m.media-amazon.com/images/I/51Wl3gA-4HL.jpg" alt="Wallpaper Sticker Collection">
+                    <div class="overlay">
+                        <h3>Wallpaper Sticker</h3>
+                        <a href="#products" class="overlay-cta">View Collection</a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -669,34 +978,39 @@
             <h2 class="section-title">Why Choose S.S. Enterprises?</h2>
             <div class="features">
                 <div class="feature">
-                    <div class="feature-icon"><i class="fas fa-check-circle"></i></div>
-                    <h3>Quality Assured</h3>
-                    <p>All products undergo rigorous quality checks to ensure customer satisfaction.</p>
+                    <div class="feature-icon"><i class="fas fa-star"></i></div>
+                    <h3>Premium Quality</h3>
+                    <p>Every product is carefully curated and tested to meet international standards.</p>
                 </div>
+
                 <div class="feature">
-                    <div class="feature-icon"><i class="fas fa-money-bill-wave"></i></div>
-                    <h3>Best Prices</h3>
-                    <p>Wholesale rates with unbeatable discounts for bulk orders and retailers.</p>
+                    <div class="feature-icon"><i class="fas fa-tag"></i></div>
+                    <h3>Unbeatable Prices</h3>
+                    <p>Wholesale rates with exclusive discounts designed for bulk buyers and retailers.</p>
                 </div>
+
                 <div class="feature">
-                    <div class="feature-icon"><i class="fas fa-shipping-fast"></i></div>
-                    <h3>Fast Delivery</h3>
-                    <p>Quick and reliable shipping across the country with real-time tracking.</p>
+                    <div class="feature-icon"><i class="fas fa-truck"></i></div>
+                    <h3>Express Shipping</h3>
+                    <p>Fast and reliable delivery across India with live tracking on every order.</p>
                 </div>
+
                 <div class="feature">
-                    <div class="feature-icon"><i class="fas fa-handshake"></i></div>
-                    <h3>Expert Support</h3>
-                    <p>Dedicated customer service team ready to assist with product selection.</p>
+                    <div class="feature-icon"><i class="fas fa-headset"></i></div>
+                    <h3>24/7 Support</h3>
+                    <p>Dedicated team available round-the-clock to assist you with any queries.</p>
                 </div>
+
                 <div class="feature">
-                    <div class="feature-icon"><i class="fas fa-cube"></i></div>
-                    <h3>Wide Selection</h3>
-                    <p>Thousands of products to choose from with regular new collections added.</p>
+                    <div class="feature-icon"><i class="fas fa-list"></i></div>
+                    <h3>Vast Catalog</h3>
+                    <p>Browse from thousands of items updated regularly with latest trends and designs.</p>
                 </div>
+
                 <div class="feature">
-                    <div class="feature-icon"><i class="fas fa-undo"></i></div>
-                    <h3>Easy Returns</h3>
-                    <p>Hassle-free return and exchange policy for complete peace of mind.</p>
+                    <div class="feature-icon"><i class="fas fa-refresh"></i></div>
+                    <h3>Hassle-Free Returns</h3>
+                    <p>Simple return process with full refunds—your satisfaction is our priority.</p>
                 </div>
             </div>
         </div>
@@ -707,97 +1021,211 @@
             <h2 class="section-title">Client Testimonials</h2>
             <div class="testimonials-grid">
                 <div class="testimonial">
-                    <div class="testimonial-text">"Outstanding quality products at wholesale prices. S.S. Enterprises has become our trusted supplier for all home decoration needs."</div>
-                    <div class="testimonial-author">Rajesh Kumar - Furniture Retailer</div>
+                    <div class="testimonial-text">
+                        Outstanding quality at unbeatable wholesale prices. S.S. Enterprises has become our go-to supplier for premium home decoration products. Highly recommended!
+                    </div>
+                    <div class="testimonial-author-wrap">
+                        <div class="author-avatar">RK</div>
+                        <div class="testimonial-author">
+                            <div class="author-name">Rajesh Kumar</div>
+                            <div class="author-title">Furniture Retailer, Mumbai</div>
+                        </div>
+                    </div>
                 </div>
+
                 <div class="testimonial">
-                    <div class="testimonial-text">"The variety of designs and quick delivery make S.S. Enterprises the best choice. Their customer service is exceptional!"</div>
-                    <div class="testimonial-author">Priya Sharma - Interior Designer</div>
+                    <div class="testimonial-text">
+                        Exceptional variety and lightning-fast delivery. The team's responsiveness and product quality are unmatched in the wholesale market. A true game-changer!
+                    </div>
+                    <div class="testimonial-author-wrap">
+                        <div class="author-avatar">PS</div>
+                        <div class="testimonial-author">
+                            <div class="author-name">Priya Sharma</div>
+                            <div class="author-title">Interior Designer, Delhi</div>
+                        </div>
+                    </div>
                 </div>
+
                 <div class="testimonial">
-                    <div class="testimonial-text">"Best wholesale rates in the market! We've saved significantly on our bulk purchases while maintaining premium quality."</div>
-                    <div class="testimonial-author">Vikram Patel - Store Owner</div>
+                    <div class="testimonial-text">
+                        Best wholesale rates combined with premium quality—we've maximized our profit margins without compromising on standards. Simply excellent!
+                    </div>
+                    <div class="testimonial-author-wrap">
+                        <div class="author-avatar">VP</div>
+                        <div class="testimonial-author">
+                            <div class="author-name">Vikram Patel</div>
+                            <div class="author-title">Store Owner, Bangalore</div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
     <section id="contact" class="contact-section">
-        <div class="container">
-            <h2 class="section-title">Get in Touch</h2>
-            <div class="contact-content">
-                <div class="contact-info">
-                    <h3>Contact Information</h3>
-                    <div class="contact-item">
-                        <i class="fas fa-map-marker-alt"></i>
-                        <div>
-                            <strong>Address</strong><br>
-                            S.S. Enterprises<br>
-                            Uttar Pardesh, India
-                        </div>
-                    </div>
-                    <div class="contact-item">
-                        <i class="fas fa-phone"></i>
-                        <div>
-                            <strong>Phone</strong><br>
-                            +91 8299551873
-                        </div>
-                    </div>
-                    <div class="contact-item">
-                        <i class="fas fa-envelope"></i>
-                        <div>
-                            <strong>Email</strong><br>
-                            info@ssenterpises.com
-                        </div>
-                    </div>
-                    <div class="contact-item">
-                        <i class="fas fa-clock"></i>
-                        <div>
-                            <strong>Business Hours</strong><br>
-                            Mon - Sat: 9:00 AM - 6:00 PM<br>
-                            Sunday: Closed
-                        </div>
+        <div class="contact-grid">
+            <div class="contact-card">
+                <h3>Contact Information</h3>
+                <p>Reach out to our sales and support teams. We're here to help with product selection, bulk quotes, and custom orders.</p>
+
+                <div class="contact-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <div>
+                        <strong>Address</strong><br>
+                        S.S. Enterprises<br>
+                        Uttar Pradesh, India
                     </div>
                 </div>
-                <form class="contact-form" id="contactForm">
-                    <input type="text" placeholder="Your Name" required>
-                    <input type="email" placeholder="Your Email" required>
-                    <input type="text" placeholder="Company Name" required>
-                    <textarea placeholder="Tell us about your inquiry..." rows="6" required></textarea>
-                    <button type="submit" class="btn">Send Inquiry</button>
-                </form>
+
+                <div class="contact-item">
+                    <i class="fas fa-phone"></i>
+                    <div>
+                        <strong>Phone</strong><br>
+                        +91 8299551873
+                    </div>
+                </div>
+
+                <div class="contact-item">
+                    <i class="fas fa-envelope"></i>
+                    <div>
+                        <strong>Email</strong><br>
+                        info@ssenterpises.com
+                    </div>
+                </div>
+
+                <div class="contact-item">
+                    <i class="fas fa-clock"></i>
+                    <div>
+                        <strong>Business Hours</strong><br>
+                        Mon - Sat: 9:00 AM - 6:00 PM<br>
+                        Sunday: Closed
+                    </div>
+                </div>
+
+                <div class="contact-quick">
+                    <div class="contact-pill">Request Catalog</div>
+                    <div class="contact-pill">Bulk Pricing</div>
+                    <div class="contact-pill">Sample Orders</div>
+                </div>
             </div>
+
+            <form class="contact-form" id="contactForm">
+                <h3>Send Us A Message</h3>
+                <div class="form-row">
+                    <div class="field"><input type="text" name="name" placeholder="Your Name" required></div>
+                    <div class="field"><input type="email" name="email" placeholder="Your Email" required></div>
+                </div>
+                <div class="form-row">
+                    <div class="field"><input type="text" name="company" placeholder="Company Name"></div>
+                    <div class="field"><input type="text" name="phone" placeholder="Phone (optional)"></div>
+                </div>
+                <textarea name="message" placeholder="Tell us about your inquiry..." rows="6" required></textarea>
+                <button type="submit" class="btn">Send Inquiry</button>
+                <div class="contact-note">We typically respond within 1 business day. Or call us for urgent requests.</div>
+            </form>
         </div>
     </section>
 
-    <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h4>About Us</h4>
-                    <p>S.S. Enterprises is a premier wholesale distributor of home decoration products with years of experience in the industry.</p>
+        <script>
+            (function(){
+                var form = document.getElementById('contactForm');
+                if (!form) return;
+
+                form.addEventListener('submit', function(e){
+                    e.preventDefault();
+
+                    var formData = new FormData(form);
+                    var name = (formData.get('name') || '').trim();
+                    var email = (formData.get('email') || '').trim();
+                    var company = (formData.get('company') || '').trim();
+                    var phone = (formData.get('phone') || '').trim();
+                    var message = (formData.get('message') || '').trim();
+
+                    if (!name || !email || !message) {
+                        alert('Please fill in your name, email and message before sending.');
+                        return;
+                    }
+
+                    var whatsappNumber = '918299551873'; // international format, no + or 00
+
+                    var text = 'Hi, ' + name + '! New inquiry from S.S. Enterprises website:%0A%0A'
+                        + 'Name: ' + encodeURIComponent(name) + '%0A'
+                        + 'Email: ' + encodeURIComponent(email) + '%0A'
+                        + 'Company: ' + encodeURIComponent(company) + '%0A'
+                        + 'Phone: ' + encodeURIComponent(phone) + '%0A%0A'
+                        + 'Message: ' + encodeURIComponent(message);
+
+                    // Create full URL for WhatsApp. This will open WhatsApp Web or the app.
+                    var url = 'https://api.whatsapp.com/send?phone=' + whatsappNumber + '&text=' + text;
+
+                    // Open in a new tab/window. The user must confirm/send the message in WhatsApp.
+                    window.open(url, '_blank');
+
+                    setTimeout(function(){
+                        alert('WhatsApp window opened. Please review and press send in WhatsApp to complete.');
+                    }, 400);
+
+                    form.reset();
+                });
+            })();
+        </script>
+
+    <footer class="site-footer">
+        <div class="footer-top">
+            <div class="footer-brand">
+                <div style="display:block;align-items:center;gap:0.8rem;">
+                    <img src="assest/logo.svg" alt="S.S. Enterprises" class="logo-img">
+                    <!-- <div> -->
+                        <!-- <div class="logo-text">S.S. Enterprises</div> -->
+                        <div style="font-size:0.85rem;color:rgba(255,255,255,0.85);">Wholesale Home decore &amp; Furnishings</div>
+                    <!-- </div> -->
                 </div>
-                <div class="footer-section">
-                    <h4>Quick Links</h4>
-                    <ul>
-                        <li><a href="#products">Products</a></li>
-                        <li><a href="#about">About</a></li>
-                        <li><a href="#contact">Contact</a></li>
-                        <li><a href="#">FAQs</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h4>Follow Us</h4>
-                    <ul>
-                        <li><a href="#"><i class="fab fa-facebook"></i> Facebook</a></li>
-                        <li><a href="#"><i class="fab fa-instagram"></i> Instagram</a></li>
-                        <li><a href="#"><i class="fab fa-twitter"></i> Twitter</a></li>
-                        <li><a href="#"><i class="fab fa-linkedin"></i> LinkedIn</a></li>
-                    </ul>
+                <p class="brand-desc">Supplying premium home decoration products to retailers and designers across India. Fast shipping, bulk pricing and curated collections.</p>
+                <div style="margin-top:6px;">
+                    <a href="#contact" class="btn" style="padding:0.6rem 0.9rem; border-radius:8px; font-size:0.9rem;">Contact Sales</a>
                 </div>
             </div>
-            <div class="footer-bottom">
-                <p>&copy; 2026 S.S. Enterprises. All rights reserved. | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
+
+            <div class="footer-links">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="#products">Products</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                    <li><a href="#">FAQs</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-contact">
+                <h4>Contact</h4>
+                <p><strong>Phone:</strong> +91 8299551873</p>
+                <p><strong>Email:</strong> info@ssenterpises.com</p>
+                <p style="margin-top:8px;color:rgba(255,255,255,0.85);">Mon - Sat: 9:00 AM - 6:00 PM</p>
+                <div style="margin-top:10px;" class="socials">
+                    <a href="#" aria-label="facebook"><i class="fab fa-facebook"></i></a>
+                    <a href="#" aria-label="instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" aria-label="twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="#" aria-label="linkedin"><i class="fab fa-linkedin"></i></a>
+                </div>
+            </div>
+
+            <div class="footer-newsletter">
+                <h4>Subscribe</h4>
+                <p style="color:rgba(255,255,255,0.9);margin:0 0 0.6rem 0;">Get updates on new collections and bulk offers.</p>
+                <form id="newsletterForm">
+                    <input type="email" placeholder="Your email address" required>
+                    <button type="submit">Subscribe</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <div class="copyright">&copy; 2026 S.S. Enterprises. All rights reserved.</div>
+            <div style="display:flex;gap:0.75rem;align-items:center;">
+                <a href="#" style="color:rgba(255,255,255,0.85);text-decoration:none;">Privacy Policy</a>
+                <span style="color:rgba(255,255,255,0.35);">|</span>
+                <a href="#" style="color:rgba(255,255,255,0.85);text-decoration:none;">Terms of Service</a>
+                <a href="#home" class="back-to-top" style="margin-left:1rem;">Back to top ↑</a>
             </div>
         </div>
     </footer>
@@ -844,15 +1272,33 @@
             e.preventDefault();
             const btn = this.querySelector('button');
             const originalText = btn.textContent;
-            btn.textContent = '✓ Sent Successfully!';
-            btn.style.background = '#1a472a';
-            
+            btn.textContent = '✓ Sent';
+            btn.disabled = true;
+            btn.style.opacity = '0.9';
             setTimeout(() => {
                 btn.textContent = originalText;
-                btn.style.background = '';
+                btn.disabled = false;
+                btn.style.opacity = '';
                 this.reset();
-            }, 2000);
+            }, 1800);
         });
+
+        // Newsletter form (simple client-side behaviour)
+        const newsletter = document.getElementById('newsletterForm');
+        if (newsletter) {
+            newsletter.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const input = newsletter.querySelector('input[type="email"]');
+                const original = newsletter.querySelector('button').textContent;
+                newsletter.querySelector('button').textContent = 'Subscribed ✓';
+                newsletter.querySelector('button').disabled = true;
+                setTimeout(() => {
+                    newsletter.querySelector('button').textContent = original;
+                    newsletter.querySelector('button').disabled = false;
+                    input.value = '';
+                }, 1800);
+            });
+        }
 
         // Add parallax effect to hero section
         window.addEventListener('scroll', () => {
@@ -978,6 +1424,21 @@
         };
         window.addEventListener('scroll', revealOnScroll);
         revealOnScroll();
+
+        // Mobile nav toggle
+        const navToggle = document.querySelector('.nav-toggle');
+        const mainNav = document.getElementById('mainNav');
+        if (navToggle && mainNav) {
+            navToggle.addEventListener('click', (e) => {
+                e.stopPropagation();
+                mainNav.classList.toggle('nav-open');
+            });
+            document.addEventListener('click', (e) => {
+                if (!mainNav.contains(e.target) && mainNav.classList.contains('nav-open')) {
+                    mainNav.classList.remove('nav-open');
+                }
+            });
+        }
     </script>
 </body>
 </html>
